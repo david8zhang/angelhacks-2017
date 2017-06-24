@@ -1,0 +1,21 @@
+{
+  "name": "react-native-redux-expo-boilerplate",
+  "version": "0.0.0",
+  "description": "Hello Expo!",
+  "author": null,
+  "private": true,
+  "main": "main.js",
+  "dependencies": {
+    "expo": "17.0.0",
+    "react": "16.0.0-alpha.6",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-17.0.0.tar.gz",
+    "react-native-router-flux": "^3.39.2",
+    "react-redux": "^5.0.5",
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.0.0",
+    "eslint-config-rallycoding": "^3.1.0",
+    "eslint-plugin-import": "^2.0.1"
+  }
+}
