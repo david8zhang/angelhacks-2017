@@ -7,13 +7,8 @@ const RouterComponent = () => (
 		<Scene
 			key='map'
 			component={MapPage}
-			style={sceneStyle}
 		/>
 	</Router>
 );
-
-const sceneStyle = {
-	paddingTop: 24
-};
 
 export default RouterComponent;

@@ -7,9 +7,11 @@
   "main": "main.js",
   "dependencies": {
     "expo": "17.0.0",
+    "module-resolver": "^1.0.0",
     "react": "16.0.0-alpha.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-17.0.0.tar.gz",
     "react-native-elements": "^0.15.0",
+    "react-native-maps": "^0.15.3",
     "react-native-router-flux": "^3.39.2",
     "react-redux": "^5.0.5",
     "redux": "^3.6.0"
