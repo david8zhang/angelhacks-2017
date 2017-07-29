@@ -1,13 +1,12 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
-import { HomePage } from './pages';
+import { ChatPage } from './pages';
 
 const RouterComponent = () => (
-	<Router>
-		<Scene 
-			key='home'
-			component={HomePage}
-			title='Home'
+	<Router hideNavBar>
+		<Scene
+			key='chat'
+			component={ChatPage}
 		/>
 	</Router>
 );
