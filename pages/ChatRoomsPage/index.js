@@ -64,11 +64,12 @@ class ChatRoomsPage extends Component {
 const styles = {
     roomViewStyle: {
         borderRadius: 2,
-        borderBottomColor: '#eeeeee',
+        borderBottomWidth: 5,
+        borderBottomColor: '#ff0000',
         margin: 8,
         padding: 8,
         flexDirection: 'row',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
     },
     roomTitleStyle: {
         fontSize: 20
