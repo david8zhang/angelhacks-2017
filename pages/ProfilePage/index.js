@@ -45,11 +45,36 @@ class ProfilePage extends Component {
 							style={bubblePic}
 						/>
 					</View>
-					<View style={bubble}></View>
-					<View style={bubble}></View>
-					<View style={bubble}></View>
-					<View style={bubble}></View>
-					<View style={bubble}></View>
+					<View style={bubble}>
+						<Image
+							source={require('../../assets/icons/singleGroup.png')}
+							style={bubblePic}
+						/>
+					</View>
+					<View style={bubble}>
+						<Image
+							source={require('../../assets/icons/singleTrash.png')}
+							style={bubblePic}
+						/>
+					</View>
+					<View style={bubble}>
+						<Image
+							source={require('../../assets/icons/multiPin.png')}
+							style={bubblePic}
+						/>
+					</View>
+					<View style={bubble}>
+						<Image
+							source={require('../../assets/icons/multiGroup.png')}
+							style={bubblePic}
+						/>
+					</View>
+					<View style={bubble}>
+						<Image
+							source={require('../../assets/icons/multiTrash.png')}
+							style={bubblePic}
+						/>
+					</View>
 				</View>
 			</View>
 		);
@@ -58,7 +83,7 @@ class ProfilePage extends Component {
 
 const styles = {
 	main: {
-		marginTop: 130,
+		marginTop: 80,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
@@ -107,8 +132,10 @@ const styles = {
 		marginRight: 10
 	},
 	bubblePic: {
-		width: 40,
-		height: 40
+		marginTop: 15,
+		alignSelf: 'center',
+		width: 50,
+		height: 50
 	}
 };
 
