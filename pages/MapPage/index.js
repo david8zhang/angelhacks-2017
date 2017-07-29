@@ -1,23 +1,31 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { BottomBar } from '../../components';
 
 class MapPage extends Component {
 	render() {
-		const { textStyle } = styles;
+		const styles = {
+			pageStyle: {
+				flex: 1
+			},
+			textStyle: {
+				flex: 8
+			}
+		}
+
 		return (
-			<View>
-				<Text style={textStyle}>
+			<View style={ styles.pageStyle }>
+				<Text style={styles.textStyle}>
 					This one is the map page
 				</Text>
+				<BottomBar
+					barType='map'
+				/>
 			</View>
 		);
 	}
 }
 
-const styles = {
-	textStyle: {
-		margin: 100
-	}
-};
+
 
 export default MapPage;
