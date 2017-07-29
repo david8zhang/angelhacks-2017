@@ -1,6 +1,6 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
-import { HomePage, MapPage } from './pages';
+import { MapPage, ChatPage, ChatRoomsPage } from './pages';
 
 const RouterComponent = () => (
 	<Router hideNavBar>
@@ -8,7 +8,18 @@ const RouterComponent = () => (
 			key='map'
 			component={MapPage}
 		/>
+		<Scene
+			key='chat'
+			component={ChatPage}
+		/>
+		<Scene
+			key='chatRooms'
+			component={ChatRoomsPage}
+			style={sceneStyle}
+		/>
 	</Router>
 );
+
+const sceneStyle = { paddingTop: 24 };
 
 export default RouterComponent;
