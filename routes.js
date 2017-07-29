@@ -5,13 +5,13 @@ import { ChatPage, ChatRoomsPage } from './pages';
 const RouterComponent = () => (
 	<Router hideNavBar>
 		<Scene
-			key='chat'
-			component={ChatPage}
-		/>
-		<Scene
 			key='chatRooms'
 			component={ChatRoomsPage}
 			style={sceneStyle}
+		/>
+		<Scene
+			key='chat'
+			component={ChatPage}
 		/>
 	</Router>
 );

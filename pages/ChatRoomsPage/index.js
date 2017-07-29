@@ -10,7 +10,7 @@ class ChatRoomsPage extends Component {
         const { roomViewStyle, roomDescriptionStyle, roomActiveStyle, roomTitleStyle } = styles;
         const rooms = [
             {
-                img: "https://img.pokemondb.net/artwork/treecko.jpg",
+                img: "http://cdn.texasdisposalsys.netdna-cdn.com/sites/default/files/Interior_Hero_Landfill.jpg",
                 description: "Clean up all this trash yo",
                 active: true,
                 name: "Lots of trash here"
@@ -63,7 +63,8 @@ class ChatRoomsPage extends Component {
 
 const styles = {
     roomViewStyle: {
-        backgroundColor: '#eeeeee',
+        borderRadius: 2,
+        borderBottomColor: '#eeeeee',
         margin: 8,
         padding: 8,
         flexDirection: 'row',
@@ -81,8 +82,7 @@ const styles = {
     // Have some kind of consistent styling for the title bar
     titleStyle: {
         fontSize: 20,
-        flexDirection: 'row',
-        justifyContent: 'center'
+        textAlign: 'center'
     }
 }
 
