@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Image, Text } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { Button } from 'react-native-elements';
 
 class HomePage extends Component {
 	render() {
@@ -9,6 +11,11 @@ class HomePage extends Component {
 				<Text style={textStyle}>
 					Welcome to the React-Native-Redux-Expo Boilerplate!
 				</Text>
+				<Button
+					title='Go'
+					onPress={() => Actions.chatRooms()}
+					backgroundColor='#39AEF8'
+				/>
 			</View>
 		);
 	}
