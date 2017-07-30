@@ -1,14 +1,18 @@
 /* global navigator */
 import React, { Component } from 'react';
-import { Modal, View, Text, Button } from 'react-native';
+import { connect } from 'react-redux';
+import { Modal, View, Text, Button as RNButton} from 'react-native';
 import MapView from 'react-native-maps';
+import { Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
+import * as actions from '../../actions';
 import { BottomBar, Form } from '../../components';
 
 class MapPage extends Component {
 	constructor(props) {
 		super(props);
 
+		// TODO: ADD IN A STAGEDPIN
 		this.state = {
 			region: {
 				latitude: 0,
@@ -37,6 +41,8 @@ class MapPage extends Component {
 				}
 			});
 		}, () => { console.log('Error'); }, positionOption);
+
+		this.props.getMarkersAction();
 	}
 
 	onRegionChange(region) {
@@ -101,7 +107,16 @@ class MapPage extends Component {
 			onPress: () => Actions.chatRooms()
 		}];
 
-		console.log(this.state);
+		/* for draggable
+			draggable
+			onDragEnd={
+				(e) => {
+					this.setState({ x: e.nativeEvent.coordinate });
+					// TODO: UPDATE THIS IN 'DB'
+				}
+			}
+		*/
+
 		return (
 			<View style={styles.pageStyle}>
 				<Modal
@@ -126,13 +141,13 @@ class MapPage extends Component {
 							}]}/>
 							<View style={{ height: 40, flexDirection: 'row', justifyContent: 'flex-end' }}>
 								<View>
-									<Button
+									<RNButton
 										onPress={() => {this.setModalVisible(false)}}
 	 									title="Cancel"
 	 								/>
 	 							</View>
 								<View style={{marginLeft:8}}>
-									<Button
+									<RNButton
 										onPress={() => {
 											this.setModalVisible(false);
 											console.log('State', this.state);
@@ -149,11 +164,64 @@ class MapPage extends Component {
 					region={this.state.region}
 					onRegionChange={(r) => { this.onRegionChange(r); }}
 					onRegionChangeComplete={(r) => { this.onRegionChangeComplete(r); }}
-				/>
+				>
+					{
+						this.props.markers.map((marker) => {
+							const buttonTitle = (marker.joined) ? 'GO TO CHAT' : 'JOIN THIS GROUP';
+							return (
+								<MapView.Marker
+									key={marker.id}
+									coordinate={marker.latlng}
+									title={marker.title}
+									description={marker.description}
+								>
+									<MapView.Callout>
+										<Text>
+											{ marker.title }
+										</Text>
+										<Text>
+											{ marker.description }
+										</Text>
+										<Button
+											key={0}
+											buttonStyle={{ backgroundColor: '#000000' }}
+											title={buttonTitle}
+											textStyle={{ textAlign: 'center' }}
+											onPress={() => {
+												const room = {
+													name: marker.title,
+													description: marker.description,
+													img: 'https://19818-presscdn-pagely.netdna-ssl.com/wp-content/uploads/f49/c0/lamsaucelocated.jpg'
+												};
+												if (!marker.joined) {
+													this.props.joinRoomAction(room);
+													this.props.updateMarkerAction({
+														...marker,
+														joined: true
+													});
+												}
+												else {
+													// TODO: GO TO (specific) CHAT ROOM
+													Actions.chat();
+												}
+											}}
+										/>
+									</MapView.Callout>
+								</MapView.Marker>
+							);
+						})
+					}
+				</MapView>
 				<BottomBar buttons={buttons} />
 			</View>
 		);
 	}
+}
+
+const mapStateToProps = (state) => {
+	return {
+		markers: state.markers
+	};
 }
 
 const styles = {
@@ -181,4 +249,4 @@ const styles = {
 	}
 }
 
-export default MapPage;
+export default connect(mapStateToProps, actions)(MapPage);

@@ -4,27 +4,18 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { ScrollView, Image, View, Text, TouchableOpacity } from 'react-native';
 import { Tabs, Tab, Icon, Button } from 'react-native-elements';
+import * as actions from '../../actions';
+import { BottomBar } from '../../components';
 
 class ChatRoomsPage extends Component {
+
+    componentDidMount() {
+        this.props.getRoomsAction();
+    }
+
     renderRooms() {
         const { roomViewStyle, roomDescriptionStyle, roomActiveStyle, roomTitleStyle } = styles;
-        const rooms = [{
-                img: "https://f4.bcbits.com/img/0006688092_10.jpg",
-                description: "There's a lot of trash where there should be beautiful nature",
-                active: true,
-                name: "Dirty beach"
-            }, {
-                img: "http://cdn.texasdisposalsys.netdna-cdn.com/sites/default/files/Interior_Hero_Landfill.jpg",
-                description: "Clean up all this trash yo",
-                active: false,
-                name: "Lots of trash here"
-            }, {
-                img: "http://www.homedepot.com/catalog/productImages/400_compressed/d9/d97bfbf9-cf37-40d2-8fe2-6be3958eba6d_400_compressed.jpg",
-                description: "Found some trash in this",
-                active: false,
-                name: "Trash found"
-            },
-        ];
+        const rooms = this.props.rooms;
         return rooms.map((room, index) => {
             const { key, img,  description, active, name } = room;
             return (
@@ -59,12 +50,32 @@ class ChatRoomsPage extends Component {
     }
 
     render() {
+        const buttons = [{
+            id: 1,
+            icon: 'account-circle',
+            onPress: () => Actions.profile()
+        }, {
+            id: 2,
+            icon: 'add-location',
+            onPress: () => Actions.map()
+        }, {
+            id: 3,
+            icon: 'chat',
+            onPress: () => Actions.chatRooms()
+        }];
+
         return (
-            <View>
-                <Text style={styles.titleStyle}>Rooms</Text>
-                <ScrollView>
-                    {this.renderRooms()}
-                </ScrollView>
+            <View style={{ flex: 1 }}>
+                <View style={{ flex: 8 }}>
+                    <Text style={styles.titleStyle}>Rooms</Text>
+                    <ScrollView>
+                        {this.renderRooms()}
+                    </ScrollView>
+                </View>
+                <BottomBar 
+                    style={{ flex: 1 }}
+                    buttons={buttons}
+                />
             </View>
         );
     }
@@ -105,5 +116,5 @@ const mapStateToProps = (state) => (
     }
 );
 
-export default connect(mapStateToProps, null)(ChatRoomsPage);
+export default connect(mapStateToProps, actions)(ChatRoomsPage);
 /* eslint-enable */
