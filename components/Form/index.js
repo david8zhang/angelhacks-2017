@@ -68,6 +68,7 @@ class Form extends Component {
 		return (
 			<ScrollView>
 				{ this.renderInputs() }
+				{ this.props.hasButtons && this.renderHandlers() }
 			</ScrollView>
 		);
 	}
@@ -96,6 +97,7 @@ const styles = {
 		marginRight: 25
 	},
 	buttonStyle: {
+		marginTop: 10
 	},
 	container: {
 		flex: 1,
