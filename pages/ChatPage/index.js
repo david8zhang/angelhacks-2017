@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { GiftedChat } from 'react-native-gifted-chat';
+import { Navbar } from '../../components';
 
 const uid = Date.now();
 
@@ -43,7 +46,9 @@ class ChatPage extends Component {
 
 	componentWillUnmount() {
 		const { rtm } = this.props.chat;
-		rtm.stop();
+		if (rtm.state !== 'stopped') {
+			rtm.stop();
+		}
 	}
 
 	onSend(messages = []) {
@@ -55,18 +60,45 @@ class ChatPage extends Component {
 	}
 
 	render() {
+		const { fullHeight } = styles;
 		return (
-			<GiftedChat
-				messages={this.state.messages}
-				onSend={this.onSend}
-				user={{
-					_id: uid,
-					avatar
-				}}
-			/>
+			<View style={fullHeight}>
+				<Navbar
+					navbarColor='#59D988'
+					title='Chat'
+					leftButtonConfig={{
+						title: 'Back',
+						tintColor: '#ffffff',
+						handler: () => {
+							const { rtm } = this.props.chat;
+							rtm.stop();
+							Actions.chatRooms();
+						}
+					}}
+				/>
+				<GiftedChat
+					messages={this.state.messages}
+					onSend={this.onSend}
+					user={{
+						_id: uid,
+						avatar
+					}}
+				/>
+			</View>
 		);
 	}
 }
+
+const styles = {
+	fullHeight: {
+		flex: 1
+	},
+	bubbleStyle: {
+		backgroundColor: '#59D988',
+		padding: 10,
+		borderRadius: 5
+	}
+};
 
 const mapStateToProps = (state) => (
 	{

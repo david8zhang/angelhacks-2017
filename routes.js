@@ -19,8 +19,15 @@ const RouterComponent = () => (
 		<Scene
 			key='chat'
 			component={ChatPage}
+			style={styles.sceneStyle}
 		/>
 	</Router>
 );
+
+const styles = {
+	sceneStyle: {
+		paddingTop: 24
+	}
+};
 
 export default RouterComponent;
