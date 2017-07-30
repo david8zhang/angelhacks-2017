@@ -38,7 +38,7 @@ class BottomBar extends Component {
 			</View>
 		);
 	}
-}
+} 
 
 const styles = {
 	barStyle: {
