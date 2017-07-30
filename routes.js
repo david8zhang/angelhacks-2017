@@ -9,6 +9,10 @@ const RouterComponent = () => (
 			component={MapPage}
 		/>
 		<Scene
+			key='chatRooms'
+			component={ChatRoomsPage}
+		/>
+		<Scene
 			key='profile'
 			component={ProfilePage}
 		/>
@@ -16,14 +20,7 @@ const RouterComponent = () => (
 			key='chat'
 			component={ChatPage}
 		/>
-		<Scene
-			key='chatRooms'
-			component={ChatRoomsPage}
-			style={sceneStyle}
-		/>
 	</Router>
 );
-
-const sceneStyle = { paddingTop: 24 };
 
 export default RouterComponent;
