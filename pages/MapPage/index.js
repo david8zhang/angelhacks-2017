@@ -1,7 +1,7 @@
 /* global navigator */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal, View, Text, Button as RNButton } from 'react-native';
+import { Modal, View, Text, Button as RNButton, Linking } from 'react-native';
 import MapView from 'react-native-maps';
 import { Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
@@ -239,7 +239,7 @@ class MapPage extends Component {
 									description={marker.description}
 									pinColor='#59D988'
 								>
-									<MapView.Callout 
+									<MapView.Callout
 										onPress={() => {
 											if (isAndroid) {
 												this.joinGroup(marker);
@@ -322,9 +322,9 @@ class MapPage extends Component {
 									description={partner.description}
 									pinColor='#edcb23'
 								>
-									<MapView.Callout 
+									<MapView.Callout
 										onPress={() => {
-											// TODO: GO TO THEIR SITE USING PARTNER.LINK
+											Linking.openURL(partner.link).catch(err => console.error('An error occurred', err));
 										}}
 									>
 										<Text style={ styles.calloutTitle }>
@@ -342,7 +342,7 @@ class MapPage extends Component {
 											title={buttonTitle}
 											textStyle={{ textAlign: 'center' }}
 											onPress={() => {
-												// TODO: GO TO THEIR SITE USING PARTNER.LINK
+												Linking.openURL(partner.link).catch(err => console.error('An error occurred', err));
 											}}
 										/>
 									</MapView.Callout>
