@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { GiftedChat } from 'react-native-gifted-chat';
+import { Navbar } from '../../components';
 
 const uid = Date.now();
 
@@ -44,7 +46,9 @@ class ChatPage extends Component {
 
 	componentWillUnmount() {
 		const { rtm } = this.props.chat;
-		rtm.stop();
+		if (rtm.state !== 'stopped') {
+			rtm.stop();
+		}
 	}
 
 	onSend(messages = []) {
@@ -59,6 +63,19 @@ class ChatPage extends Component {
 		const { fullHeight } = styles;
 		return (
 			<View style={fullHeight}>
+				<Navbar
+					navbarColor='#59D988'
+					title='Chat'
+					leftButtonConfig={{
+						title: 'Back',
+						tintColor: '#ffffff',
+						handler: () => {
+							const { rtm } = this.props.chat;
+							rtm.stop();
+							Actions.chatRooms();
+						}
+					}}
+				/>
 				<GiftedChat
 					messages={this.state.messages}
 					onSend={this.onSend}
@@ -66,7 +83,6 @@ class ChatPage extends Component {
 						_id: uid,
 						avatar
 					}}
-					bottomOffset={50}
 				/>
 			</View>
 		);
@@ -76,6 +92,11 @@ class ChatPage extends Component {
 const styles = {
 	fullHeight: {
 		flex: 1
+	},
+	bubbleStyle: {
+		backgroundColor: '#59D988',
+		padding: 10,
+		borderRadius: 5
 	}
 };
 
