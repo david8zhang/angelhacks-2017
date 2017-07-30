@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import NavigationBar from 'react-native-navbar';
-import { Divider } from 'react-native-elements';
 
 class Navbar extends Component {
 	render() {
-		const { navStyle, dividerStyle } = styles;
+		const { navStyle } = styles;
 		const titleConfig = { 
 			title: this.props.title, 
 			tintColor: this.props.tintColor,
@@ -20,7 +19,6 @@ class Navbar extends Component {
 					rightButton={this.props.rightButtonConfig}
 					leftButton={this.props.leftButtonConfig}
 				/>
-				<Divider style={dividerStyle} />
 			</View>
 		);
 	}
