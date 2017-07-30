@@ -148,7 +148,6 @@ class MapPage extends Component {
 													img: 'https://19818-presscdn-pagely.netdna-ssl.com/wp-content/uploads/f49/c0/lamsaucelocated.jpg'
 												};
 												if (!marker.joined) {
-													// TODO: CHANGE THE BUTTON TEXT / GET RID IF THIS
 													this.props.joinRoomAction(room);
 													this.props.updateMarkerAction({
 														...marker,
