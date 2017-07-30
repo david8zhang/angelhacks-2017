@@ -11,10 +11,15 @@ export default (state = defaultState, action) => {
 			return action.payload;
 		}
 		case types.UPDATE_MARKER: {
-			let newState = JSON.parse(JSON.stringify(state));
-
-			newState[action.payload.id] = action.payload;
-
+			const newState = [];
+			state.forEach((marker) => {
+				const { id } = marker;
+				const newMarker = { ...marker };
+				if (id === action.payload.id) {
+					newMarker.joined = true;
+				}
+				newState.push(newMarker);
+			});
 			return newState;
 		}
 		case types.CREATE_MARKER: {

@@ -114,10 +114,9 @@ class MapPage extends Component {
 		};
 		if (!marker.joined) {
 			this.props.joinRoomAction(room);
-			this.props.updateMarkerAction({
-				...marker,
-				joined: true
-			});
+			const joinedMarker = { ...marker, joined: true };
+			this.props.updateMarkerAction(joinedMarker);
+			api.joinRoom(joinedMarker);
 		} else {
 			// TODO: GO TO (specific) CHAT ROOM
 			Actions.chat();
@@ -229,6 +228,7 @@ class MapPage extends Component {
 				>
 					{
 						this.props.markers.map((marker) => {
+							console.log('MARKER', marker);
 							const buttonTitle = (marker.joined) ? 'GO TO CHAT' : 'JOIN THIS GROUP';
 							const buttonColor = (marker.joined) ? '#59D988' : '#acecc3';
 							return (
