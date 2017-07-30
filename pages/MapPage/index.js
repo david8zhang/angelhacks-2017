@@ -56,7 +56,6 @@ class MapPage extends Component {
 		}, () => { console.log('Error'); }, positionOption);
 
 		api.fetchMarkers();
-		this.props.getMarkersAction();
 		this.props.getPartnersAction();
 	}
 
@@ -138,7 +137,8 @@ class MapPage extends Component {
 				joined: false
 			}
 		});
-		this.props.createMarkerAction(marker);
+		marker.id = Date.now().toString();
+		api.createMarker(marker);
 	}
 
 	render() {
