@@ -5,13 +5,12 @@ import { MapPage, ChatPage, ChatRoomsPage } from './pages';
 const RouterComponent = () => (
 	<Router hideNavBar>
 		<Scene
-			key='map'
-			component={MapPage}
-		/>
-		<Scene
 			key='chatRooms'
 			component={ChatRoomsPage}
-			style={sceneStyle}
+		/>
+		<Scene
+			key='map'
+			component={MapPage}
 		/>
 		<Scene
 			key='chat'
@@ -19,7 +18,5 @@ const RouterComponent = () => (
 		/>
 	</Router>
 );
-
-const sceneStyle = { paddingTop: 24 };
 
 export default RouterComponent;

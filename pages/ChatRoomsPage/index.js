@@ -8,12 +8,21 @@ import { Tabs, Tab, Icon, Button } from 'react-native-elements';
 class ChatRoomsPage extends Component {
     renderRooms() {
         const { roomViewStyle, roomDescriptionStyle, roomActiveStyle, roomTitleStyle } = styles;
-        const rooms = [
-            {
+        const rooms = [{
+                img: "https://f4.bcbits.com/img/0006688092_10.jpg",
+                description: "There's a lot of trash where there should be beautiful nature",
+                active: true,
+                name: "Dirty beach"
+            }, {
                 img: "http://cdn.texasdisposalsys.netdna-cdn.com/sites/default/files/Interior_Hero_Landfill.jpg",
                 description: "Clean up all this trash yo",
-                active: true,
+                active: false,
                 name: "Lots of trash here"
+            }, {
+                img: "http://www.homedepot.com/catalog/productImages/400_compressed/d9/d97bfbf9-cf37-40d2-8fe2-6be3958eba6d_400_compressed.jpg",
+                description: "Found some trash in this",
+                active: false,
+                name: "Trash found"
             },
         ];
         return rooms.map((room, index) => {
@@ -22,7 +31,7 @@ class ChatRoomsPage extends Component {
                 <TouchableOpacity onPress={() => Actions.chat()} key={index}>
                     <View style={roomViewStyle}>
                         <Image
-                            style={{ width:64, height:64 }}
+                            style={{ width: 64, height: 64, borderRadius: 32, }}
                             source={{ uri:img }}
                         />
 
@@ -64,9 +73,8 @@ class ChatRoomsPage extends Component {
 const styles = {
     roomViewStyle: {
         borderRadius: 2,
-        borderBottomWidth: 5,
-        borderBottomColor: '#ff0000',
         margin: 8,
+        paddingRight: 64,
         padding: 8,
         flexDirection: 'row',
         justifyContent: 'flex-start',
@@ -75,15 +83,19 @@ const styles = {
         fontSize: 20
     },
     roomDescriptionStyle: {
-        fontSize: 15
+        fontSize: 15,
     },
     roomActiveStyle: {
         fontSize: 10
     },
     // Have some kind of consistent styling for the title bar
     titleStyle: {
+        marginTop:24,
+        padding:8,
         fontSize: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        borderBottomWidth: 2,
+        borderBottomColor: '#eeeeee',
     }
 }
 
