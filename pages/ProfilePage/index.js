@@ -4,6 +4,50 @@ import { BottomBar } from '../../components';
 import { Actions } from 'react-native-router-flux';
 
 class ProfilePage extends Component {
+	renderAchievements() {
+		const { stats, bubble, bubblePic } = styles;
+		return (
+			<View style={stats}>
+				<View style={bubble}>
+					<Image 
+						source={require('../../assets/icons/singlePin.png')}
+						style={bubblePic}
+					/>
+				</View>
+				<View style={bubble}>
+					<Image
+						source={require('../../assets/icons/singleGroup.png')}
+						style={bubblePic}
+					/>
+				</View>
+				<View style={bubble}>
+					<Image
+						source={require('../../assets/icons/singleTrash.png')}
+						style={bubblePic}
+					/>
+				</View>
+				<View style={bubble}>
+					<Image
+						source={require('../../assets/icons/multiPin.png')}
+						style={bubblePic}
+					/>
+				</View>
+				<View style={bubble}>
+					<Image
+						source={require('../../assets/icons/multiGroup.png')}
+						style={bubblePic}
+					/>
+				</View>
+				<View style={bubble}>
+					<Image
+						source={require('../../assets/icons/multiTrash.png')}
+						style={bubblePic}
+					/>
+				</View>
+			</View>
+		);
+	}
+
 	render() {
 		const buttons = [{
 			id: 1,
@@ -11,7 +55,7 @@ class ProfilePage extends Component {
 			onPress: () => Actions.profile()
 		}, {
 			id: 2,
-			icon: 'add-location',
+			icon: 'map',
 			onPress: () => Actions.map()
 		}, {
 			id: 3,
@@ -21,16 +65,13 @@ class ProfilePage extends Component {
 		const {
 			outerFlex,
 			main, 
-			headerStyle, 
-			headerPos, 
+			headerStyle,  
 			subtitle, 
 			pic, 
 			achievementsPos, 
 			achievementsText,
 			stats,  
 			divider,
-			bubble,
-			bubblePic,
 			bottomBar
 		} = styles;
 		return (
@@ -42,7 +83,7 @@ class ProfilePage extends Component {
 							style={pic}
 						/>
 					</View>
-					<View style={headerPos}>
+					<View>
 						<Text style={headerStyle}>
 							Randeep Bhatia
 						</Text>
@@ -56,44 +97,7 @@ class ProfilePage extends Component {
 							Achievements
 						</Text>
 					</View>
-					<View style={stats}>
-						<View style={bubble}>
-							<Image 
-								source={require('../../assets/icons/singlePin.png')}
-								style={bubblePic}
-							/>
-						</View>
-						<View style={bubble}>
-							<Image
-								source={require('../../assets/icons/singleGroup.png')}
-								style={bubblePic}
-							/>
-						</View>
-						<View style={bubble}>
-							<Image
-								source={require('../../assets/icons/singleTrash.png')}
-								style={bubblePic}
-							/>
-						</View>
-						<View style={bubble}>
-							<Image
-								source={require('../../assets/icons/multiPin.png')}
-								style={bubblePic}
-							/>
-						</View>
-						<View style={bubble}>
-							<Image
-								source={require('../../assets/icons/multiGroup.png')}
-								style={bubblePic}
-							/>
-						</View>
-						<View style={bubble}>
-							<Image
-								source={require('../../assets/icons/multiTrash.png')}
-								style={bubblePic}
-							/>
-						</View>
-					</View>
+					{ this.renderAchievements() }
 				</View>
 				<BottomBar buttons={buttons} />
 			</View>
@@ -112,9 +116,6 @@ const styles = {
 	},
 	headerStyle: {
 		fontSize: 30
-	},
-	headerPos: {
-		
 	},
 	subtitle: {
 		alignSelf: 'center'
