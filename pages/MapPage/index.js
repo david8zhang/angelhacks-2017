@@ -191,7 +191,7 @@ class MapPage extends Component {
 								<View>
 									<RNButton
 										onPress={() => {this.setModalVisible(false)}}
-	 									title="Cancel"
+	 									title="cancel"
 	 									color={'#59D988'}
 	 								/>
 	 							</View>
@@ -212,7 +212,7 @@ class MapPage extends Component {
 												}
 											});
 										}}
-										title="Add Pin"
+										title="add pin"
 										color={'#59D988'}
 									/>
 								</View>
