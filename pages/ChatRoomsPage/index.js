@@ -62,7 +62,7 @@ class ChatRoomsPage extends Component {
         return (
             <View>
                 <Text style={styles.titleStyle}>Rooms</Text>
-                <ScrollView>
+                <ScrollView style={{ flexDirection: 'column', flex:1 }}>
                     {this.renderRooms()}
                 </ScrollView>
             </View>
