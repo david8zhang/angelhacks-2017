@@ -13,7 +13,8 @@ class MapPage extends Component {
 				longitude: 0,
 	        	latitudeDelta: 0.0922,
       			longitudeDelta: 0.0421,
-			}
+			},
+			currentPosd: false
 		}
 
 		this.onRegionChange = this.onRegionChange.bind(this);
@@ -33,9 +34,41 @@ class MapPage extends Component {
 	}
 
 	onRegionChange(region) {
-		this.setState({
-			region
-		});
+		if (this.state.currentPosd) {
+			this.setState({
+				region
+			});
+		}
+		else {
+			this.setState({
+				region: {
+					latitude: region.latitude,
+					longitude: region.longitudeDelta,
+					latitudeDelta: this.state.region.latitudeDelta,
+					longitudeDelta: this.state.region.longitudeDelta
+				}
+			});
+		}
+		
+	}
+
+	onRegionChangeComplete(region) {
+		if (this.state.currentPosd) {
+			this.setState({
+				region
+			});
+		}
+		else {
+			this.setState({
+				region: {
+					latitude: region.latitude,
+					longitude: region.longitudeDelta,
+					latitudeDelta: this.state.region.latitudeDelta,
+					longitudeDelta: this.state.region.longitudeDelta
+				},
+				currentPosd: true
+			});
+		}
 	}
 
 	render() {
@@ -53,7 +86,8 @@ class MapPage extends Component {
 				<MapView
 					style={styles.mapStyle}
 					region={this.state.region}
-					onRegionChange={ this.onRegionChange }
+					onRegionChange={ (r) => { this.onRegionChange(r) }}
+					onRegionChangeComplete={ (r) => { this.onRegionChangeComplete(r) }}
 				/>
 				<BottomBar
 					barType='map'
