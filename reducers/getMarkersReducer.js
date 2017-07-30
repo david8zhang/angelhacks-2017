@@ -8,7 +8,7 @@ const defaultState = markers;
 export default (state = defaultState, action) => {
 	switch (action.type) {
 		case types.GET_MARKERS: {
-			return state;
+			return action.payload;
 		}
 		case types.UPDATE_MARKER: {
 			let newState = JSON.parse(JSON.stringify(state));
