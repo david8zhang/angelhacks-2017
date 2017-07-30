@@ -41,7 +41,7 @@ let partners = [
         title: 'Sponsored Marker',
         description: 'This is a sponsored marker.',
         company: 'Partner',
-        link: 'http://www.breadfish.co.uk',
+        link: 'http://www.wholefoodsmarket.com/',
         joined: false
     }
 ];

@@ -27,6 +27,7 @@ class LoginPage extends Component {
 		}, {
 			key: 'password',
 			label: 'password',
+			secureTextEntry: true,
 			onChange: (password) => this.setState({ password })
 		}];
 		return (
