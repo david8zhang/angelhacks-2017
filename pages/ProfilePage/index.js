@@ -99,7 +99,7 @@ class ProfilePage extends Component {
 			</View>
 		);
 	}
-}
+} 
 
 const styles = {
 	outerFlex: {

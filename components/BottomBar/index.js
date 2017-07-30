@@ -53,7 +53,7 @@ const styles = {
 		alignItems: 'center',
 		flexWrap: 'wrap',
 		alignSelf: 'center'
-	}
+	} 
 };
 
 export default BottomBar;
