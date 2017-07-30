@@ -1,9 +1,11 @@
 /* global navigator */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View } from 'react-native';
 import MapView from 'react-native-maps';
 import { Actions } from 'react-native-router-flux';
 import { BottomBar } from '../../components';
+import * as actions from '../../actions';
 
 class MapPage extends Component {
 	constructor(props) {
@@ -34,6 +36,8 @@ class MapPage extends Component {
 				}
 			});
 		}, () => { console.log('Error'); }, positionOption);
+
+		this.props.getMarkersAction();
 	}
 
 	onRegionChange(region) {
@@ -102,11 +106,36 @@ class MapPage extends Component {
 					region={this.state.region}
 					onRegionChange={(r) => { this.onRegionChange(r); }}
 					onRegionChangeComplete={(r) => { this.onRegionChangeComplete(r); }}
-				/>
+				>
+					{
+						this.props.markers.map((marker) => {
+							return (
+								<MapView.Marker draggable
+									key={marker.id}
+									coordinate={marker.latlng}
+									title={marker.title}
+									description={marker.description}
+									onDragEnd={
+										(e) => {
+											this.setState({ x: e.nativeEvent.coordinate });
+											// TODO: UPDATE THIS IN 'DB'
+										}
+									}
+								/>
+							);
+						})
+					}
+				</MapView>
 				<BottomBar buttons={buttons} />
 			</View>
 		);
 	}
 }
 
-export default MapPage;
+const mapStateToProps = (state) => {
+	return {
+		markers: state.markers
+	};
+}
+
+export default connect(mapStateToProps, actions)(MapPage);
