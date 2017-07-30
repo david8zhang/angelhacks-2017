@@ -53,15 +53,18 @@ class ChatRoomsPage extends Component {
         const buttons = [{
             id: 1,
             icon: 'account-circle',
-            onPress: () => Actions.profile()
+            onPress: () => Actions.profile(),
+            size: 34
         }, {
             id: 2,
-            icon: 'add-location',
-            onPress: () => Actions.map()
+            icon: 'map',
+            onPress: () => Actions.map(),
+            size: 34
         }, {
             id: 3,
             icon: 'chat',
-            onPress: () => Actions.chatRooms()
+            onPress: () => Actions.chatRooms(),
+            size: 56
         }];
 
         return (

@@ -17,6 +17,14 @@ export default (state = defaultState, action) => {
 
 			return newState;
 		}
+		case types.CREATE_MARKER: {
+			let newState = JSON.parse(JSON.stringify(state));
+
+			let newData = action.payload;
+			newData.id = newState.length;
+
+			return newState.concat(newData);
+		}
 		default: {
 			return state;
 		}

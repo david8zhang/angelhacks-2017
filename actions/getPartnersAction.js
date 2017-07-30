@@ -1,8 +1,8 @@
 import { default as types } from './types';
 
-export const getRoomsAction = () => {
+export const getPartnersAction = () => {
 	return {
-		type: types.GET_ROOMS,
+		type: types.GET_PARTNERS,
 		payload: {}
 	};
 }

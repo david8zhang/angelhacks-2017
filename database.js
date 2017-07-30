@@ -8,7 +8,42 @@ let markers = [
 		title: 'this is a sample marker',
 		description: '1 8 0 0 M A R K E D',
         joined: false
-	}
+	},
+    {
+        id: 1,
+        latlng: {
+            longitude: -122.3226574856638,
+            latitude: 37.55960021284216
+        },
+        title: 'test marker #1',
+        description: 'this is the first test marker',
+        joined: false
+    },
+    {
+        id: 2,
+        latlng: {
+            longitude: -122.3426574856638,
+            latitude: 37.55960021284216
+        },
+        title: 'test marker #2',
+        description: 'this is the second test marker',
+        joined: false
+    }
+];
+
+let partners = [
+    {
+        id: 3,
+        latlng: {
+            longitude: -122.3126574856638,
+            latitude: 37.56960021284216
+        },
+        title: 'sponsored marker',
+        description: 'this is a sponsored marker',
+        company: 'Partner',
+        link: 'http://www.breadfish.co.uk',
+        joined: false
+    }
 ];
 
 let rooms = [
@@ -29,5 +64,6 @@ let rooms = [
 
 export {
 	markers,
-	rooms
+	rooms,
+    partners
 };

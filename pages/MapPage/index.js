@@ -1,12 +1,14 @@
 /* global navigator */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal, View, Text, Button as RNButton} from 'react-native';
+import { Modal, View, Text, Button as RNButton } from 'react-native';
 import MapView from 'react-native-maps';
 import { Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import * as actions from '../../actions';
 import { BottomBar, Form } from '../../components';
+
+const Device = require('react-native-device-detection');
 
 class MapPage extends Component {
 	constructor(props) {
@@ -24,6 +26,16 @@ class MapPage extends Component {
 			modalVisible: false,
 			modalTitle:'',
 			modalDescription:'',
+			stagedPin: 	{
+				id: 4,
+				latlng: {
+					latitude: 37.78825,
+		      		longitude: -122.4324
+				},
+				title: 'this is a sample marker',
+				description: '1 8 0 0 M A R K E D',
+		        joined: false
+			}
 		};
 
 		this.onRegionChange = this.onRegionChange.bind(this);
@@ -43,6 +55,7 @@ class MapPage extends Component {
 		}, () => { console.log('Error'); }, positionOption);
 
 		this.props.getMarkersAction();
+		this.props.getPartnersAction();
 	}
 
 	onRegionChange(region) {
@@ -92,30 +105,58 @@ class MapPage extends Component {
 		// Do something
 	}
 
+	joinGroup(marker) {
+		const room = {
+			name: marker.title,
+			description: marker.description,
+			img: 'https://19818-presscdn-pagely.netdna-ssl.com/wp-content/uploads/f49/c0/lamsaucelocated.jpg'
+		};
+		if (!marker.joined) {
+			this.props.joinRoomAction(room);
+			this.props.updateMarkerAction({
+				...marker,
+				joined: true
+			});
+		} else {
+			// TODO: GO TO (specific) CHAT ROOM
+			Actions.chat();
+		}
+	}
+
+	confirmMarker(marker) {
+		this.setState({
+			stagedPin: {
+				id: 4,
+				latlng: {
+					latitude: 37.78825,
+						longitude: -122.4324
+				},
+				title: 'this is a sample marker',
+				description: '1 8 0 0 M A R K E D',
+				joined: false
+			}
+		});
+		this.props.createMarkerAction(marker);
+	}
+
 	render() {
+		const { isAndroid, isIos } = Device;
 		const buttons = [{
 			id: 1,
 			icon: 'account-circle',
-			onPress: () => Actions.profile()
+			onPress: () => Actions.profile(),
+			size: 34
 		}, {
 			id: 2,
 			icon: 'add-location',
-			onPress: () => this.setModalVisible(true)
+			onPress: () => this.setModalVisible(true),
+			size: 56
 		}, {
 			id: 3,
 			icon: 'chat',
-			onPress: () => Actions.chatRooms()
+			onPress: () => Actions.chatRooms(),
+			size: 34
 		}];
-
-		/* for draggable
-			draggable
-			onDragEnd={
-				(e) => {
-					this.setState({ x: e.nativeEvent.coordinate });
-					// TODO: UPDATE THIS IN 'DB'
-				}
-			}
-		*/
 
 		return (
 			<View style={styles.pageStyle}>
@@ -150,7 +191,18 @@ class MapPage extends Component {
 									<RNButton
 										onPress={() => {
 											this.setModalVisible(false);
-											console.log('State', this.state);
+											this.setState({
+												stagedPin: {
+													id: -1,
+													latlng: {
+														latitude: this.state.region.latitude,
+											      		longitude: this.state.region.longitude
+													},
+													title: this.state.modalTitle.title,
+													description: this.state.modalDescription.description,
+											        joined: false
+												}
+											});
 										}}
 										title="Add Pin"
 									/>
@@ -174,12 +226,19 @@ class MapPage extends Component {
 									coordinate={marker.latlng}
 									title={marker.title}
 									description={marker.description}
+									pinColor='#59D988'
 								>
-									<MapView.Callout>
-										<Text>
+									<MapView.Callout 
+										onPress={() => {
+											if (isAndroid) {
+												this.joinGroup(marker);
+											}
+										}}
+									>
+										<Text style={ styles.calloutTitle }>
 											{ marker.title }
 										</Text>
-										<Text>
+										<Text style={ styles.calloutText }>
 											{ marker.description }
 										</Text>
 										<Button
@@ -188,22 +247,89 @@ class MapPage extends Component {
 											title={buttonTitle}
 											textStyle={{ textAlign: 'center' }}
 											onPress={() => {
-												const room = {
-													name: marker.title,
-													description: marker.description,
-													img: 'https://19818-presscdn-pagely.netdna-ssl.com/wp-content/uploads/f49/c0/lamsaucelocated.jpg'
-												};
-												if (!marker.joined) {
-													this.props.joinRoomAction(room);
-													this.props.updateMarkerAction({
-														...marker,
-														joined: true
-													});
+												if (isIos) {
+													this.joinGroup(marker);
 												}
-												else {
-													// TODO: GO TO (specific) CHAT ROOM
-													Actions.chat();
-												}
+											}}
+										/>
+									</MapView.Callout>
+								</MapView.Marker>
+							);
+						})
+					}
+					<MapView.Marker draggable
+						key={this.state.stagedPin.id}
+						coordinate={this.state.stagedPin.latlng}
+						title={this.state.stagedPin.title}
+						description={this.state.stagedPin.description}
+						onDragEnd={
+							(e) => {
+								this.setState({
+									stagedPin: {
+										...this.state.stagedPin,
+										latlng: e.nativeEvent.coordinate
+									}
+								});
+							}
+						}
+						pinColor='#e2934d'
+					>
+						<MapView.Callout onPress={() => {
+							if (isAndroid) {
+								this.confirmMarker(this.state.stagedPin);
+							}
+						}}>
+							<Text style={ styles.calloutTitle }>
+								{ this.state.stagedPin.title }
+							</Text>
+							<Text style={ styles.calloutText }>
+								{ this.state.stagedPin.description }
+							</Text>
+							<Button
+								key={1}
+								buttonStyle={{ backgroundColor: '#000000' }}
+								title={'CONFIRM'}
+								textStyle={{ textAlign: 'center' }}
+								onPress={() => {
+									if (isIos) {
+										this.confirmMarker(this.state.stagedPin);
+									}
+								}}
+							/>
+						</MapView.Callout>
+					</MapView.Marker>
+					{
+						this.props.partners.map((partner) => {
+							const buttonTitle = 'CHECK OUT SITE';
+							return (
+								<MapView.Marker
+									key={partner.id}
+									coordinate={partner.latlng}
+									title={partner.title}
+									description={partner.description}
+									pinColor='#edcb23'
+								>
+									<MapView.Callout 
+										onPress={() => {
+											// TODO: GO TO THEIR SITE USING PARTNER.LINK
+										}}
+									>
+										<Text style={ styles.calloutTitle }>
+											{ partner.title }
+										</Text>
+										<Text style={ styles.calloutText }>
+											{ partner.description }
+										</Text>
+										<Text style={ styles.calloutText }>
+											{ partner.company }
+										</Text>
+										<Button
+											key={0}
+											buttonStyle={{ backgroundColor: '#000000' }}
+											title={buttonTitle}
+											textStyle={{ textAlign: 'center' }}
+											onPress={() => {
+												// TODO: GO TO THEIR SITE USING PARTNER.LINK
 											}}
 										/>
 									</MapView.Callout>
@@ -220,7 +346,8 @@ class MapPage extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		markers: state.markers
+		markers: state.markers,
+		partners: state.partners
 	};
 }
 
@@ -246,6 +373,13 @@ const styles = {
 		padding: 8,
 		textAlign: 'left',
 		textAlignVertical: 'top'
+	},
+	calloutTitle: {
+		fontSize: 24,
+		fontWeight: 'bold'
+	},
+	calloutText: {
+		fontSize: 12
 	}
 }
 

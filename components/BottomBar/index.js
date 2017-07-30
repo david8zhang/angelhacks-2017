@@ -26,7 +26,7 @@ class BottomBar extends Component {
 					buttonStyle={{ backgroundColor: 'transparent' }}
 					icon={{
 						name: btn.icon,
-						size: 34
+						size: btn.size
 					}}
 					textStyle={{ textAlign: 'center' }}
 					onPress={() => btn.onPress()}

@@ -143,15 +143,18 @@ class ProfilePage extends Component {
 		const buttons = [{
 			id: 1,
 			icon: 'account-circle',
-			onPress: () => Actions.profile()
+			onPress: () => Actions.profile(),
+			size: 56
 		}, {
 			id: 2,
 			icon: 'map',
-			onPress: () => Actions.map()
+			onPress: () => Actions.map(),
+			size: 34
 		}, {
 			id: 3,
 			icon: 'chat',
-			onPress: () => Actions.chatRooms()
+			onPress: () => Actions.chatRooms(),
+			size: 34
 		}];
 		const {
 			outerFlex,
