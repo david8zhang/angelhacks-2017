@@ -229,7 +229,7 @@ class MapPage extends Component {
 				>
 					{
 						this.props.markers.map((marker) => {
-							const buttonTitle = (marker.joined) ? 'GO TO CHAT' : 'JOIN THIS GROUP';
+							const buttonTitle = (marker.joined) ? 'go to chat' : 'join this group';
 							const buttonColor = (marker.joined) ? '#59D988' : '#acecc3';
 							return (
 								<MapView.Marker
@@ -256,7 +256,7 @@ class MapPage extends Component {
 											key={0}
 											buttonStyle={{ backgroundColor: buttonColor, borderRadius: 2 }}
 											title={buttonTitle}
-											textStyle={{ textAlign: 'center' }}
+											textStyle={{ textAlign: 'center', fontSize: 24 }}
 											onPress={() => {
 												if (isIos) {
 													this.joinGroup(marker);
@@ -302,7 +302,7 @@ class MapPage extends Component {
 								key={1}
 								buttonStyle={{ backgroundColor: '#acecc3', borderRadius: 2 }}
 								title={'CONFIRM'}
-								textStyle={{ textAlign: 'center' }}
+								textStyle={{ textAlign: 'center', fontSize: 24 }}
 								onPress={() => {
 									if (isIos) {
 										this.confirmMarker(this.state.stagedPin);
@@ -313,7 +313,7 @@ class MapPage extends Component {
 					</MapView.Marker>
 					{
 						this.props.partners.map((partner) => {
-							const buttonTitle = 'CHECK OUT SITE';
+							const buttonTitle = 'check out site';
 							return (
 								<MapView.Marker
 									key={partner.id}
@@ -340,7 +340,7 @@ class MapPage extends Component {
 											key={0}
 											buttonStyle={{ backgroundColor: '#acecc3', borderRadius: 2 }}
 											title={buttonTitle}
-											textStyle={{ textAlign: 'center' }}
+											textStyle={{ textAlign: 'center', fontSize: 24 }}
 											onPress={() => {
 												Linking.openURL(partner.link).catch(err => console.error('An error occurred', err));
 											}}

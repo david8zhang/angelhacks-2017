@@ -1,20 +1,21 @@
 /* eslint-disable global-require */
 import React, { Component } from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Navbar, Form } from '../../components';
 
 class LoginPage extends Component {
+
 	render() {
-		const { imageWrapperStyle, imageStyle } = styles;
+		const { imageWrapperStyle, imageStyle, logoStyle, navbarStyle } = styles;
 		const handlers = [{
-			title: 'Log In',
+			title: 'log in',
 			backgroundColor: '#59D988',
 			onPress: () => {
 				Actions.map();
 			}
 		}, {
-			title: 'Sign Up',
+			title: 'sign up',
 			backgroundColor: '#acecc3',
 			onPress: () => {
 				Actions.map();
@@ -32,15 +33,14 @@ class LoginPage extends Component {
 		}];
 		return (
 				<View>
-					<Navbar
-						navbarColor='#59D988'
-						title='Login'
-					/>
 					<View style={imageWrapperStyle}>
 						<Image
 							style={imageStyle}
 							source={require('../../assets/ecolocateLogo.png')}
 						/>
+					</View>
+					<View>
+						<Text style= {logoStyle}>ecolocate</Text>
 					</View>
 					<Form 
 						hasButtons 
@@ -60,6 +60,11 @@ const styles = {
 	},
 	imageWrapperStyle: {
 		alignItems: 'center'
+	},
+	logoStyle: {
+		fontSize: 60,
+		alignSelf: 'center',
+		marginBottom: 10
 	}
 };
 
