@@ -193,7 +193,7 @@ class ProfilePage extends Component {
 					<Modal
 						animationType={"slide"}
 				        transparent={true}
-				        visible={this.state.modalVisible}
+						visible={this.state.modalVisible}
 				    >
 				    	<View style={modalStyle}>
 				    		<View style={modalImageContainer}>
