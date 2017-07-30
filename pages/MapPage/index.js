@@ -300,7 +300,7 @@ class MapPage extends Component {
 							<Button
 								key={1}
 								buttonStyle={{ backgroundColor: '#acecc3', borderRadius: 2 }}
-								title={'CONFIRM'}
+								title={'confirm'}
 								textStyle={{ textAlign: 'center', fontSize: 24 }}
 								onPress={() => {
 									if (isIos) {

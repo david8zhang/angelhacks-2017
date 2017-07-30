@@ -207,7 +207,7 @@ class ProfilePage extends Component {
 				    		</View>
 				    		<Text style={modalTextStyle}>{this.state.modalText}</Text>
 				    		<Button
-				    			title={"Close"}
+				    			title={"close"}
 				    			onPress={() => {this.closeModal()}}
 				    			style={closeButton}
 				    			color={'#59D988'}
