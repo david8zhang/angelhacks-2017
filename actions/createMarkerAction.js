@@ -5,4 +5,4 @@ export const createMarkerAction = (marker) => {
 		type: types.CREATE_MARKER,
 		payload: marker
 	};
-}
+};

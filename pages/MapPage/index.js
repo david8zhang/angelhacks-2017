@@ -6,6 +6,7 @@ import MapView from 'react-native-maps';
 import { Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import * as actions from '../../actions';
+import * as api from '../../actions/api';
 import { BottomBar, Form } from '../../components';
 
 const Device = require('react-native-device-detection');
@@ -54,7 +55,7 @@ class MapPage extends Component {
 			});
 		}, () => { console.log('Error'); }, positionOption);
 
-		this.props.getMarkersAction();
+		api.fetchMarkers();
 		this.props.getPartnersAction();
 	}
 
@@ -136,7 +137,8 @@ class MapPage extends Component {
 				joined: false
 			}
 		});
-		this.props.createMarkerAction(marker);
+		marker.id = Date.now().toString();
+		api.createMarker(marker);
 	}
 
 	render() {

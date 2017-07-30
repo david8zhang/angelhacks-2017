@@ -1,8 +1,8 @@
 import { default as types } from './types';
 
-export const getMarkersAction = () => {
+export const getMarkersAction = (markers) => {
 	return {
 		type: types.GET_MARKERS,
-		payload: {}
+		payload: markers
 	};
-}
+};
