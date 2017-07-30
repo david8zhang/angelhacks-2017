@@ -30,8 +30,8 @@ class MapPage extends Component {
 			stagedPin: 	{
 				id: 4,
 				latlng: {
-					latitude: 37.78825,
-		      		longitude: -122.4324
+					latitude: 0,
+		      		longitude: 0
 				},
 				title: 'this is a sample marker',
 				description: '1 8 0 0 M A R K E D',
@@ -114,10 +114,9 @@ class MapPage extends Component {
 		};
 		if (!marker.joined) {
 			this.props.joinRoomAction(room);
-			this.props.updateMarkerAction({
-				...marker,
-				joined: true
-			});
+			const joinedMarker = { ...marker, joined: true };
+			this.props.updateMarkerAction(joinedMarker);
+			api.joinRoom(joinedMarker);
 		} else {
 			// TODO: GO TO (specific) CHAT ROOM
 			Actions.chat();
@@ -129,8 +128,8 @@ class MapPage extends Component {
 			stagedPin: {
 				id: 4,
 				latlng: {
-					latitude: 37.78825,
-						longitude: -122.4324
+					latitude: 0,
+					longitude: 0
 				},
 				title: 'Sample Marker',
 				description: '1 8 0 0 M A R K E D',

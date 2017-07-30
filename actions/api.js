@@ -22,3 +22,8 @@ export const createMarker = (marker) => (
 		console.log('Err', err);
 	})
 );
+
+export const joinRoom = (marker) => {
+	const { id } = marker;
+	return axios.patch(`${constants.pinURL}/${id}`, marker).then((res) => console.log('PATCH', res));
+};
