@@ -1,10 +1,12 @@
+/* eslint-disable global-require */
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Navbar, Form } from '../../components';
 
 class LoginPage extends Component {
 	render() {
+		const { imageWrapperStyle, imageStyle } = styles;
 		const handlers = [{
 			title: 'Log In',
 			backgroundColor: '#59D988',
@@ -33,6 +35,12 @@ class LoginPage extends Component {
 						navbarColor='#59D988'
 						title='Login'
 					/>
+					<View style={imageWrapperStyle}>
+						<Image
+							style={imageStyle}
+							source={require('../../assets/ecolocateLogo.png')}
+						/>
+					</View>
 					<Form 
 						hasButtons 
 						handlers={handlers}
@@ -45,8 +53,8 @@ class LoginPage extends Component {
 
 const styles = {
 	imageStyle: {
-		height: 300,
-		width: 300,
+		height: 200,
+		width: 200,
 		resizeMode: 'contain',
 	},
 	imageWrapperStyle: {
