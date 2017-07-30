@@ -1,8 +1,9 @@
 /* global navigator */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import MapView from 'react-native-maps';
+import { Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import { BottomBar } from '../../components';
 import * as actions from '../../actions';
@@ -99,6 +100,16 @@ class MapPage extends Component {
 			}
 		};
 
+		/* for draggable
+			draggable
+			onDragEnd={
+				(e) => {
+					this.setState({ x: e.nativeEvent.coordinate });
+					// TODO: UPDATE THIS IN 'DB'
+				}
+			}
+		*/
+
 		return (
 			<View style={styles.pageStyle}>
 				<MapView
@@ -110,18 +121,32 @@ class MapPage extends Component {
 					{
 						this.props.markers.map((marker) => {
 							return (
-								<MapView.Marker draggable
+								<MapView.Marker
 									key={marker.id}
 									coordinate={marker.latlng}
 									title={marker.title}
 									description={marker.description}
-									onDragEnd={
-										(e) => {
-											this.setState({ x: e.nativeEvent.coordinate });
-											// TODO: UPDATE THIS IN 'DB'
-										}
-									}
-								/>
+								>
+									<MapView.Callout>
+										<Text>
+											{ marker.title }
+										</Text>
+										<Text>
+											{ marker.description }
+										</Text>
+										<Button
+											key={0}
+											buttonStyle={{ backgroundColor: '#000000' }}
+											title='JOIN THIS GROUP'
+											textStyle={{ textAlign: 'center' }}
+											onPress={() => {
+												// TODO: JOIN THIS GROUP
+												console.log(marker);
+												console.log('dude mate bro');
+											}}
+										/>
+									</MapView.Callout>
+								</MapView.Marker>
 							);
 						})
 					}
