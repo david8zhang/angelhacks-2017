@@ -97,7 +97,8 @@ const styles = {
 		marginRight: 25
 	},
 	buttonStyle: {
-		marginTop: 10
+		marginTop: 10,
+		borderRadius: 2
 	},
 	container: {
 		flex: 1,
