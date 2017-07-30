@@ -14,7 +14,7 @@ class LoginPage extends Component {
 				Actions.map();
 			}
 		}, {
-			title: 'Sign In',
+			title: 'Sign Up',
 			backgroundColor: '#acecc3',
 			onPress: () => {
 				Actions.map();
