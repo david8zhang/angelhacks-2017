@@ -1,12 +1,14 @@
 /* global navigator */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal, View, Text, Button as RNButton} from 'react-native';
+import { Modal, View, Text, Button as RNButton } from 'react-native';
 import MapView from 'react-native-maps';
 import { Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import * as actions from '../../actions';
 import { BottomBar, Form } from '../../components';
+
+const Device = require('react-native-device-detection');
 
 class MapPage extends Component {
 	constructor(props) {
@@ -92,7 +94,27 @@ class MapPage extends Component {
 		// Do something
 	}
 
+	joinGroup(marker) {
+		console.log('Hello!');
+		const room = {
+			name: marker.title,
+			description: marker.description,
+			img: 'https://19818-presscdn-pagely.netdna-ssl.com/wp-content/uploads/f49/c0/lamsaucelocated.jpg'
+		};
+		if (!marker.joined) {
+			this.props.joinRoomAction(room);
+			this.props.updateMarkerAction({
+				...marker,
+				joined: true
+			});
+		} else {
+			// TODO: GO TO (specific) CHAT ROOM
+			Actions.chat();
+		}
+	}
+
 	render() {
+		const { isAndroid } = Device;
 		const buttons = [{
 			id: 1,
 			icon: 'account-circle',
@@ -167,6 +189,7 @@ class MapPage extends Component {
 				>
 					{
 						this.props.markers.map((marker) => {
+							console.log('JOINED', marker.joined);
 							const buttonTitle = (marker.joined) ? 'GO TO CHAT' : 'JOIN THIS GROUP';
 							return (
 								<MapView.Marker
@@ -175,7 +198,13 @@ class MapPage extends Component {
 									title={marker.title}
 									description={marker.description}
 								>
-									<MapView.Callout>
+									<MapView.Callout 
+										onPress={() => {
+											if (isAndroid) {
+												this.joinGroup(marker);
+											}
+										}}
+									>
 										<Text>
 											{ marker.title }
 										</Text>
@@ -188,21 +217,8 @@ class MapPage extends Component {
 											title={buttonTitle}
 											textStyle={{ textAlign: 'center' }}
 											onPress={() => {
-												const room = {
-													name: marker.title,
-													description: marker.description,
-													img: 'https://19818-presscdn-pagely.netdna-ssl.com/wp-content/uploads/f49/c0/lamsaucelocated.jpg'
-												};
-												if (!marker.joined) {
-													this.props.joinRoomAction(room);
-													this.props.updateMarkerAction({
-														...marker,
-														joined: true
-													});
-												}
-												else {
-													// TODO: GO TO (specific) CHAT ROOM
-													Actions.chat();
+												if (!isAndroid) {
+													this.joinGroup(marker);
 												}
 											}}
 										/>
