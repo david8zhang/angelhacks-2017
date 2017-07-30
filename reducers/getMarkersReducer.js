@@ -1,11 +1,6 @@
 import { default as types } from '../actions/types';
-import {
-	markers
-} from '../database';
 
-const defaultState = markers;
-
-export default (state = defaultState, action) => {
+export default (state = [], action) => {
 	switch (action.type) {
 		case types.GET_MARKERS: {
 			return action.payload;
