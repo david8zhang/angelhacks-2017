@@ -26,7 +26,16 @@ class MapPage extends Component {
 			modalVisible: false,
 			modalTitle:'',
 			modalDescription:'',
-			stagedPin: {}
+			stagedPin: 	{
+				id: 4,
+				latlng: {
+					latitude: 37.78825,
+		      		longitude: -122.4324
+				},
+				title: 'this is a sample marker',
+				description: '1 8 0 0 M A R K E D',
+		        joined: false
+			}
 		};
 
 		this.onRegionChange = this.onRegionChange.bind(this);
@@ -116,13 +125,22 @@ class MapPage extends Component {
 
 	confirmMarker(marker) {
 		this.setState({
-			stagedPin: {}
+			stagedPin: {
+				id: 4,
+				latlng: {
+					latitude: 37.78825,
+						longitude: -122.4324
+				},
+				title: 'this is a sample marker',
+				description: '1 8 0 0 M A R K E D',
+				joined: false
+			}
 		});
 		this.props.createMarkerAction(marker);
 	}
 
 	render() {
-		const { isAndroid } = Device;
+		const { isAndroid, isIos } = Device;
 		const buttons = [{
 			id: 1,
 			icon: 'account-circle',
@@ -229,7 +247,7 @@ class MapPage extends Component {
 											title={buttonTitle}
 											textStyle={{ textAlign: 'center' }}
 											onPress={() => {
-												if (!isAndroid) {
+												if (isIos) {
 													this.joinGroup(marker);
 												}
 											}}
@@ -256,7 +274,11 @@ class MapPage extends Component {
 						}
 						pinColor='#e2934d'
 					>
-						<MapView.Callout>
+						<MapView.Callout onPress={() => {
+							if (isAndroid) {
+								this.confirmMarker(this.state.stagedPin);
+							}
+						}}>
 							<Text style={ styles.calloutTitle }>
 								{ this.state.stagedPin.title }
 							</Text>
@@ -269,7 +291,7 @@ class MapPage extends Component {
 								title={'CONFIRM'}
 								textStyle={{ textAlign: 'center' }}
 								onPress={() => {
-									if (!isAndroid) {
+									if (isIos) {
 										this.confirmMarker(this.state.stagedPin);
 									}
 								}}
