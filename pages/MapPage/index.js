@@ -131,7 +131,7 @@ class MapPage extends Component {
 					latitude: 37.78825,
 						longitude: -122.4324
 				},
-				title: 'this is a sample marker',
+				title: 'Sample Marker',
 				description: '1 8 0 0 M A R K E D',
 				joined: false
 			}
@@ -228,6 +228,7 @@ class MapPage extends Component {
 					{
 						this.props.markers.map((marker) => {
 							const buttonTitle = (marker.joined) ? 'GO TO CHAT' : 'JOIN THIS GROUP';
+							const buttonColor = (marker.joined) ? '#59D988' : '#acecc3';
 							return (
 								<MapView.Marker
 									key={marker.id}
@@ -251,7 +252,7 @@ class MapPage extends Component {
 										</Text>
 										<Button
 											key={0}
-											buttonStyle={{ backgroundColor: '#000000' }}
+											buttonStyle={{ backgroundColor: buttonColor, borderRadius: 2 }}
 											title={buttonTitle}
 											textStyle={{ textAlign: 'center' }}
 											onPress={() => {
@@ -290,12 +291,14 @@ class MapPage extends Component {
 							<Text style={ styles.calloutTitle }>
 								{ this.state.stagedPin.title }
 							</Text>
-							<Text style={ styles.calloutText }>
-								{ this.state.stagedPin.description }
-							</Text>
+							<View style={{flexDirection: 'row'}}>
+								<Text style={ styles.calloutText }>
+									{ this.state.stagedPin.description }
+								</Text>
+							</View>
 							<Button
 								key={1}
-								buttonStyle={{ backgroundColor: '#000000' }}
+								buttonStyle={{ backgroundColor: '#acecc3', borderRadius: 2 }}
 								title={'CONFIRM'}
 								textStyle={{ textAlign: 'center' }}
 								onPress={() => {
@@ -333,7 +336,7 @@ class MapPage extends Component {
 										</Text>
 										<Button
 											key={0}
-											buttonStyle={{ backgroundColor: '#000000' }}
+											buttonStyle={{ backgroundColor: '#acecc3', borderRadius: 2 }}
 											title={buttonTitle}
 											textStyle={{ textAlign: 'center' }}
 											onPress={() => {
@@ -384,10 +387,20 @@ const styles = {
 	},
 	calloutTitle: {
 		fontSize: 24,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		color: '#59D988',
+		alignSelf: 'center'
 	},
 	calloutText: {
-		fontSize: 12
+		fontSize: 14,
+		marginTop: 5,
+		marginBottom: 10,
+		numberOfLines: 8,
+		justifyContent: 'center',
+		flex: 1,
+		flexWrap: 'wrap',
+		alignSelf: 'center',
+		maxWidth: 300
 	}
 }
 

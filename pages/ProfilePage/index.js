@@ -304,7 +304,6 @@ const styles = {
 		flexDirection: 'column',
 		width: 60,
 		height: 60,
-		borderRadius: 30,
 		alignSelf: 'center',
 		marginTop: 20,
 		marginBottom: 20
