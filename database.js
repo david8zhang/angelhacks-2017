@@ -15,8 +15,8 @@ let markers = [
             longitude: -122.3226574856638,
             latitude: 37.55960021284216
         },
-        title: 'test marker #1',
-        description: 'this is the first test marker',
+        title: 'Test Marker',
+        description: 'A description for this marker would go here. blah bla text and stuff is really long wo so much text',
         joined: false
     },
     {
@@ -25,8 +25,8 @@ let markers = [
             longitude: -122.3426574856638,
             latitude: 37.55960021284216
         },
-        title: 'test marker #2',
-        description: 'this is the second test marker',
+        title: 'Test Marker Two',
+        description: 'Another description',
         joined: false
     }
 ];
@@ -38,8 +38,8 @@ let partners = [
             longitude: -122.3126574856638,
             latitude: 37.56960021284216
         },
-        title: 'sponsored marker',
-        description: 'this is a sponsored marker',
+        title: 'Sponsored Marker',
+        description: 'This is a sponsored marker.',
         company: 'Partner',
         link: 'http://www.breadfish.co.uk',
         joined: false
