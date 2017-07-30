@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { GiftedChat } from 'react-native-gifted-chat';
 
@@ -55,18 +56,28 @@ class ChatPage extends Component {
 	}
 
 	render() {
+		const { fullHeight } = styles;
 		return (
-			<GiftedChat
-				messages={this.state.messages}
-				onSend={this.onSend}
-				user={{
-					_id: uid,
-					avatar
-				}}
-			/>
+			<View style={fullHeight}>
+				<GiftedChat
+					messages={this.state.messages}
+					onSend={this.onSend}
+					user={{
+						_id: uid,
+						avatar
+					}}
+					bottomOffset={50}
+				/>
+			</View>
 		);
 	}
 }
+
+const styles = {
+	fullHeight: {
+		flex: 1
+	}
+};
 
 const mapStateToProps = (state) => (
 	{
