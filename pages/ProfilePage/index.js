@@ -137,6 +137,6 @@ const styles = {
 		width: 50,
 		height: 50
 	}
-};
+}; 
 
 export default ProfilePage;

@@ -59,6 +59,6 @@ class BottomBar extends Component {
 			</View>
 		);
 	}
-}
+} 
 
 export default BottomBar;
