@@ -1,6 +1,8 @@
+/* global navigator */
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import MapView from 'react-native-maps';
+import { Actions } from 'react-native-router-flux';
 import { BottomBar } from '../../components';
 
 class MapPage extends Component {
@@ -11,15 +13,17 @@ class MapPage extends Component {
 			region: {
 				latitude: 0,
 				longitude: 0,
-	        	latitudeDelta: 0.0922,
-      			longitudeDelta: 0.0421,
-			}
-		}
+				latitudeDelta: 0.0922,
+				longitudeDelta: 0.0421,
+			},
+			currentPosd: false
+		};
 
 		this.onRegionChange = this.onRegionChange.bind(this);
 	}
 
 	componentDidMount() {
+		const positionOption = { timeout: 500, enableHighAccuracy: true };
 		navigator.geolocation.getCurrentPosition((d) => {
 			this.setState({
 				region: {
@@ -29,16 +33,59 @@ class MapPage extends Component {
 					longitudeDelta: this.state.region.longitudeDelta,
 				}
 			});
-		});
+		}, () => { console.log('Error'); }, positionOption);
 	}
 
 	onRegionChange(region) {
-		this.setState({
-			region
-		});
+		if (this.state.currentPosd) {
+			this.setState({
+				region
+			});
+		} else {
+			this.setState({
+				region: {
+					latitude: region.latitude,
+					longitude: region.longitudeDelta,
+					latitudeDelta: this.state.region.latitudeDelta,
+					longitudeDelta: this.state.region.longitudeDelta
+				}
+			});
+		}
+	}
+
+	onRegionChangeComplete(region) {
+		if (this.state.currentPosd) {
+			this.setState({
+				region
+			});
+		} else {
+			this.setState({
+				region: {
+					latitude: region.latitude,
+					longitude: region.longitudeDelta,
+					latitudeDelta: this.state.region.latitudeDelta,
+					longitudeDelta: this.state.region.longitudeDelta
+				},
+				currentPosd: true
+			});
+		}
 	}
 
 	render() {
+		const buttons = [{
+			id: 1,
+			icon: 'account-circle',
+			onPress: () => Actions.profile()
+		}, {
+			id: 2,
+			icon: 'add-location',
+			onPress: () => Actions.map()
+		}, {
+			id: 3,
+			icon: 'chat',
+			onPress: () => Actions.chatRooms()
+		}];
+
 		const styles = {
 			pageStyle: {
 				flex: 1
@@ -46,23 +93,20 @@ class MapPage extends Component {
 			mapStyle: {
 				flex: 8
 			}
-		}
+		};
 
 		return (
-			<View style={ styles.pageStyle }>
+			<View style={styles.pageStyle}>
 				<MapView
 					style={styles.mapStyle}
 					region={this.state.region}
-					onRegionChange={ this.onRegionChange }
+					onRegionChange={(r) => { this.onRegionChange(r); }}
+					onRegionChangeComplete={(r) => { this.onRegionChangeComplete(r); }}
 				/>
-				<BottomBar
-					barType='map'
-				/>
+				<BottomBar buttons={buttons} />
 			</View>
 		);
 	}
 }
-
-
 
 export default MapPage;
