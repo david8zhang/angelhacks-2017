@@ -12,6 +12,7 @@ class MapPage extends Component {
 	constructor(props) {
 		super(props);
 
+		// TODO: ADD IN A STAGEDPIN
 		this.state = {
 			region: {
 				latitude: 0,
@@ -120,6 +121,7 @@ class MapPage extends Component {
 				>
 					{
 						this.props.markers.map((marker) => {
+							const buttonTitle = (marker.joined) ? 'GO TO CHAT' : 'JOIN THIS GROUP';
 							return (
 								<MapView.Marker
 									key={marker.id}
@@ -137,12 +139,26 @@ class MapPage extends Component {
 										<Button
 											key={0}
 											buttonStyle={{ backgroundColor: '#000000' }}
-											title='JOIN THIS GROUP'
+											title={buttonTitle}
 											textStyle={{ textAlign: 'center' }}
 											onPress={() => {
-												// TODO: JOIN THIS GROUP
-												console.log(marker);
-												console.log('dude mate bro');
+												const room = {
+													name: marker.title,
+													description: marker.description,
+													img: 'https://19818-presscdn-pagely.netdna-ssl.com/wp-content/uploads/f49/c0/lamsaucelocated.jpg'
+												};
+												if (!marker.joined) {
+													// TODO: CHANGE THE BUTTON TEXT / GET RID IF THIS
+													this.props.joinRoomAction(room);
+													this.props.updateMarkerAction({
+														...marker,
+														joined: true
+													});
+												}
+												else {
+													// TODO: GO TO (specific) CHAT ROOM
+													Actions.chat();
+												}
 											}}
 										/>
 									</MapView.Callout>
