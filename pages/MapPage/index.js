@@ -145,17 +145,23 @@ class MapPage extends Component {
 			id: 1,
 			icon: 'account-circle',
 			onPress: () => Actions.profile(),
-			size: 34
+			size: 34,
+			color: '#59D988',
+			iconColor: 'white'
 		}, {
 			id: 2,
 			icon: 'add-location',
 			onPress: () => this.setModalVisible(true),
-			size: 56
+			size: 54,
+			color: '#59D988',
+			iconColor: 'white'
 		}, {
 			id: 3,
 			icon: 'chat',
 			onPress: () => Actions.chatRooms(),
-			size: 34
+			size: 34,
+			color: '#59D988',
+			iconColor: 'white'
 		}];
 
 		return (
@@ -185,6 +191,7 @@ class MapPage extends Component {
 									<RNButton
 										onPress={() => {this.setModalVisible(false)}}
 	 									title="Cancel"
+	 									color={'#59D988'}
 	 								/>
 	 							</View>
 								<View style={{marginLeft:8}}>
@@ -205,6 +212,7 @@ class MapPage extends Component {
 											});
 										}}
 										title="Add Pin"
+										color={'#59D988'}
 									/>
 								</View>
  							</View>

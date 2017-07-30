@@ -144,17 +144,23 @@ class ProfilePage extends Component {
 			id: 1,
 			icon: 'account-circle',
 			onPress: () => Actions.profile(),
-			size: 56
+			size: 34,
+			color: '#acecc3',
+            iconColor: 'white'
 		}, {
 			id: 2,
 			icon: 'map',
 			onPress: () => Actions.map(),
-			size: 34
+			size: 34,
+			color: '#59D988',
+			iconColor: 'white'
 		}, {
 			id: 3,
 			icon: 'chat',
 			onPress: () => Actions.chatRooms(),
-			size: 34
+			size: 34,
+			color: '#59D988',
+			iconColor: 'white'
 		}];
 		const {
 			outerFlex,
