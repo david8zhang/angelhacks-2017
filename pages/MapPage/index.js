@@ -20,6 +20,7 @@ class MapPage extends Component {
 	}
 
 	componentDidMount() {
+		const positionOption = { timeout: 500, enableHighAccuracy: true };
 		navigator.geolocation.getCurrentPosition((d) => {
 			this.setState({
 				region: {
@@ -29,7 +30,7 @@ class MapPage extends Component {
 					longitudeDelta: this.state.region.longitudeDelta,
 				}
 			});
-		});
+		}, () => { console.log('Error') }, positionOption);
 	}
 
 	onRegionChange(region) {
