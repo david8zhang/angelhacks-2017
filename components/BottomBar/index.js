@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Grid, Col } from 'react-native-elements';
 
 class BottomBar extends Component {
 	getBarContent() {
@@ -8,7 +8,9 @@ class BottomBar extends Component {
 
 		return (
 			<View style={barStyle}>
-				{ this.renderButtons() }
+				<Grid>
+					{ this.renderButtons() }
+				</Grid>
 			</View>
 		);
 	}
@@ -17,23 +19,26 @@ class BottomBar extends Component {
 		const { buttonStyle } = styles;
 
 		return this.props.buttons.map((btn) => (
-			<Button
-				key={btn.id}
-				style={buttonStyle}
-				buttonStyle={{ backgroundColor: 'transparent' }}
-				icon={{
-					name: btn.icon,
-					size: 24
-				}}
-				textStyle={{ textAlign: 'center' }}
-				onPress={() => btn.onPress()}
-			/>
+			<Col key={btn.id}>
+				<Button
+					key={btn.id}
+					style={buttonStyle}
+					buttonStyle={{ backgroundColor: 'transparent' }}
+					icon={{
+						name: btn.icon,
+						size: 34
+					}}
+					textStyle={{ textAlign: 'center' }}
+					onPress={() => btn.onPress()}
+				/>
+			</Col>
 		));
 	}
 
 	render() {
+		console.disableYellowBox = true;
 		return (
-			<View style={{ flex: 1 }}>
+			<View style={{flex: 1}}>
 				{ this.getBarContent() }
 			</View>
 		);
@@ -44,11 +49,10 @@ const styles = {
 	barStyle: {
 		flex: 1,
 		flexDirection: 'row',
-		backgroundColor: '#59D988'
-	},
-	buttonStyle: {
-		flex: 1,
-		backgroundColor: '#59D988'
+		backgroundColor: '#59D988',
+		alignItems: 'center',
+		flexWrap: 'wrap',
+		alignSelf: 'center'
 	}
 };
 
