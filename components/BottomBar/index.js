@@ -16,17 +16,18 @@ class BottomBar extends Component {
 	}
 
 	renderButtons() {
-		const { buttonStyle } = styles;
+		const { buttonStyle, colStyle } = styles;
 
 		return this.props.buttons.map((btn) => (
-			<Col key={btn.id}>
+			<Col key={btn.id} containerStyle={{ backgroundColor: btn.color, padding: 0 }}>
 				<Button
 					key={btn.id}
 					style={buttonStyle}
-					buttonStyle={{ backgroundColor: 'transparent' }}
+					buttonStyle={{ backgroundColor: btn.color, height: 75 }}
 					icon={{
 						name: btn.icon,
-						size: btn.size
+						size: btn.size,
+						color: btn.iconColor
 					}}
 					textStyle={{ textAlign: 'center' }}
 					onPress={() => btn.onPress()}
@@ -53,7 +54,7 @@ const styles = {
 		alignItems: 'center',
 		flexWrap: 'wrap',
 		alignSelf: 'center'
-	} 
+	}
 };
 
 export default BottomBar;
