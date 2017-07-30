@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { ScrollView, Image, View, Text, TouchableOpacity } from 'react-native';
 import { Tabs, Tab, Icon, Button } from 'react-native-elements';
 import * as actions from '../../actions';
+import { BottomBar } from '../../components';
 
 class ChatRoomsPage extends Component {
 
@@ -49,12 +50,32 @@ class ChatRoomsPage extends Component {
     }
 
     render() {
+        const buttons = [{
+            id: 1,
+            icon: 'account-circle',
+            onPress: () => Actions.profile()
+        }, {
+            id: 2,
+            icon: 'add-location',
+            onPress: () => Actions.map()
+        }, {
+            id: 3,
+            icon: 'chat',
+            onPress: () => Actions.chatRooms()
+        }];
+
         return (
-            <View>
-                <Text style={styles.titleStyle}>Rooms</Text>
-                <ScrollView>
-                    {this.renderRooms()}
-                </ScrollView>
+            <View style={{ flex: 1 }}>
+                <View style={{ flex: 8 }}>
+                    <Text style={styles.titleStyle}>Rooms</Text>
+                    <ScrollView>
+                        {this.renderRooms()}
+                    </ScrollView>
+                </View>
+                <BottomBar 
+                    style={{ flex: 1 }}
+                    buttons={buttons}
+                />
             </View>
         );
     }
