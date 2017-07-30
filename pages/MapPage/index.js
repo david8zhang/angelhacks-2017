@@ -395,12 +395,15 @@ const styles = {
 		fontSize: 14,
 		marginTop: 5,
 		marginBottom: 10,
+		marginLeft: 14,
 		numberOfLines: 8,
 		justifyContent: 'center',
 		flex: 1,
 		flexWrap: 'wrap',
 		alignSelf: 'center',
-		maxWidth: 300
+		maxWidth: 300,
+		minWidth: 300,
+		textAlign: 'left'
 	}
 }
 
